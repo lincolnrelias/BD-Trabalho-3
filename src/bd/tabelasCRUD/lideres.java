@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bd;
+package bd.tabelasCRUD;
 
+import bd.tabelasCRUD.Divisoes;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,7 +22,7 @@ import net.proteanit.sql.DbUtils;
  *
  * @author Lincoln dos Reis
  */
-public class GruposArmados extends javax.swing.JFrame {
+public class lideres extends javax.swing.JFrame {
 
     /**
      * Creates new form GruposArmados
@@ -29,7 +30,7 @@ public class GruposArmados extends javax.swing.JFrame {
     Connection conn = null;
     Statement stmt = null;
     ResultSet rs = null;
-    public GruposArmados() {
+    public lideres() {
         initComponents();
         selectAll();
     }
@@ -42,11 +43,16 @@ public class GruposArmados extends javax.swing.JFrame {
         try {
             conn = DriverManager.getConnection(url, props);
             stmt = conn.createStatement();
-            rs = stmt.executeQuery("Select * from grupo_armado");
+            rs = stmt.executeQuery("Select * from lider_politico");
             table.setModel(DbUtils.resultSetToTableModel(rs));
+            rs = stmt.executeQuery("Select codigog from grupo_armado");
+            cbIDGrupo.removeAllItems();
+            while(rs.next()){
+                cbIDGrupo.addItem(String.valueOf(rs.getInt("codigog")));
+            }
             
         } catch (SQLException ex) {
-            Logger.getLogger(GruposArmados.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Divisoes.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -68,8 +74,11 @@ public class GruposArmados extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        tfID = new javax.swing.JTextField();
         tfNome = new javax.swing.JTextField();
+        cbIDGrupo = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        taApoios = new javax.swing.JTextArea();
         btnInsert = new javax.swing.JButton();
         btnInsert1 = new javax.swing.JButton();
         btnInsert2 = new javax.swing.JButton();
@@ -108,9 +117,10 @@ public class GruposArmados extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setBackground(javax.swing.UIManager.getDefaults().getColor("Button.shadow"));
+        setBackground(new java.awt.Color(51, 51, 51));
 
-        table.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.darkShadow"));
+        table.setBackground(new java.awt.Color(102, 102, 102));
+        table.setForeground(new java.awt.Color(204, 204, 204));
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -132,47 +142,78 @@ public class GruposArmados extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(table);
 
-        jPanel1.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.darkShadow"));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setForeground(new java.awt.Color(51, 51, 51));
 
+        jLabel1.setBackground(new java.awt.Color(204, 204, 204));
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel1.setText("ID");
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setText("ID Grupo");
 
+        jLabel2.setBackground(new java.awt.Color(204, 204, 204));
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Nome");
 
-        tfID.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-
         tfNome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+
+        jLabel3.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel3.setText("Apoios");
+
+        taApoios.setBackground(new java.awt.Color(102, 102, 102));
+        taApoios.setColumns(20);
+        taApoios.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        taApoios.setForeground(new java.awt.Color(204, 204, 204));
+        taApoios.setRows(5);
+        taApoios.setCaretColor(new java.awt.Color(102, 102, 102));
+        jScrollPane3.setViewportView(taApoios);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tfID, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
-                    .addComponent(tfNome))
-                .addGap(10, 10, 10))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cbIDGrupo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(63, 63, 63)
+                    .addComponent(cbIDGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(jLabel3)
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         btnInsert.setText("Inserir");
@@ -210,36 +251,35 @@ public class GruposArmados extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnInsert)
                     .addComponent(btnInsert2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnInsert1)
                     .addComponent(btnInsert3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
+                        .addGap(33, 33, 33)
                         .addComponent(btnInsert3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addGap(45, 45, 45)
                         .addComponent(btnInsert)
                         .addGap(44, 44, 44)
                         .addComponent(btnInsert1)
                         .addGap(52, 52, 52)
-                        .addComponent(btnInsert2)
-                        .addGap(53, 53, 53))))
+                        .addComponent(btnInsert2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -248,8 +288,9 @@ public class GruposArmados extends javax.swing.JFrame {
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
         Integer id;
         String nome = '\''+tfNome.getText()+'\'';
+        String apoios = '\''+taApoios.getText()+'\'';
         try{
-            id = Integer.parseInt(tfID.getText());
+            id = Integer.parseInt(cbIDGrupo.getSelectedItem().toString());
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null,
             "ID precisa ser um número",
@@ -258,14 +299,14 @@ public class GruposArmados extends javax.swing.JFrame {
             return;
         }
         try {
-            PreparedStatement sql = conn.prepareStatement("insert into grupo_armado values ("+id+","+nome+",null)");
-            int executeUpdate = sql.executeUpdate();
+            PreparedStatement sql = conn.prepareStatement("insert into lider_politico values ("+id+","+nome+","+apoios+")");
+            sql.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,
             "ID não pode ser repetido",
             "Campos Inválidos",
             JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(GruposArmados.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(lideres.class.getName()).log(Level.SEVERE, null, ex);
         }
         selectAll();
     }//GEN-LAST:event_btnInsertActionPerformed
@@ -287,10 +328,10 @@ public class GruposArmados extends javax.swing.JFrame {
                 :Integer.parseInt(table.getValueAt(table.getRowCount()-1, 0).toString());
         try {
             Statement del = conn.createStatement();
-            String sql = "Delete from grupo_armado where codigog="+idDel;
+            String sql = "Delete from lider_politico where codigog="+idDel;
             del.execute(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(GruposArmados.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(lideres.class.getName()).log(Level.SEVERE, null, ex);
         }
      
       selectAll();
@@ -298,10 +339,11 @@ public class GruposArmados extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInsert1ActionPerformed
 
     private void btnInsert2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsert2ActionPerformed
-        Integer idgrupo;
+        Integer idOld;
         String nome = '\''+tfNome.getText()+'\'';
+        String apoios = '\''+taApoios.getText()+'\'';
         try{
-            idgrupo =Integer.valueOf(tfID.getText());
+            idOld =Integer.valueOf(table.getValueAt(table.getSelectedRow(),0).toString());
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null,
             "Selecione um campo para poder editar",
@@ -310,15 +352,14 @@ public class GruposArmados extends javax.swing.JFrame {
             return;
         }
         try {
-            Integer idToChange =Integer.valueOf(table.getValueAt(table.getSelectedRow(),0).toString());
-            PreparedStatement sql = conn.prepareStatement("update grupo_armado set codigog="+idgrupo+",nomegrupo="+nome+" where codigog="+idToChange);
+            PreparedStatement sql = conn.prepareStatement("update lider_politico set nomelider="+nome+",apoios="+apoios+" where codigog="+idOld);
             sql.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,
             "ID não pode ser repetido",
             "Campos Inválidos",
             JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(GruposArmados.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(lideres.class.getName()).log(Level.SEVERE, null, ex);
         }
         selectAll();
     }//GEN-LAST:event_btnInsert2ActionPerformed
@@ -340,20 +381,21 @@ public class GruposArmados extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GruposArmados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(lideres.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GruposArmados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(lideres.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GruposArmados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(lideres.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GruposArmados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(lideres.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GruposArmados().setVisible(true);
+                new lideres().setVisible(true);
             }
         });
     }
@@ -363,15 +405,18 @@ public class GruposArmados extends javax.swing.JFrame {
     private javax.swing.JButton btnInsert1;
     private javax.swing.JButton btnInsert2;
     private javax.swing.JButton btnInsert3;
+    private javax.swing.JComboBox<String> cbIDGrupo;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTextArea taApoios;
     private javax.swing.JTable table;
-    private javax.swing.JTextField tfID;
     private javax.swing.JTextField tfNome;
     // End of variables declaration//GEN-END:variables
 }

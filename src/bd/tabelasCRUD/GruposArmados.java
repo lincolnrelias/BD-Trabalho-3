@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bd;
+package bd.tabelasCRUD;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,7 +21,7 @@ import net.proteanit.sql.DbUtils;
  *
  * @author Lincoln dos Reis
  */
-public class Conflitos extends javax.swing.JFrame {
+public class GruposArmados extends javax.swing.JFrame {
 
     /**
      * Creates new form GruposArmados
@@ -29,7 +29,7 @@ public class Conflitos extends javax.swing.JFrame {
     Connection conn = null;
     Statement stmt = null;
     ResultSet rs = null;
-    public Conflitos() {
+    public GruposArmados() {
         initComponents();
         selectAll();
     }
@@ -42,11 +42,11 @@ public class Conflitos extends javax.swing.JFrame {
         try {
             conn = DriverManager.getConnection(url, props);
             stmt = conn.createStatement();
-            rs = stmt.executeQuery("Select * from conflito");
+            rs = stmt.executeQuery("Select * from grupo_armado");
             table.setModel(DbUtils.resultSetToTableModel(rs));
             
         } catch (SQLException ex) {
-            Logger.getLogger(Conflitos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GruposArmados.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -70,14 +70,6 @@ public class Conflitos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         tfID = new javax.swing.JTextField();
         tfNome = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        tfNMortos = new javax.swing.JTextField();
-        tfNFeridos = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        cbTipo = new javax.swing.JComboBox<>();
-        tfOp = new javax.swing.JTextField();
-        lbOp = new javax.swing.JLabel();
         btnInsert = new javax.swing.JButton();
         btnInsert1 = new javax.swing.JButton();
         btnInsert2 = new javax.swing.JButton();
@@ -118,7 +110,8 @@ public class Conflitos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(javax.swing.UIManager.getDefaults().getColor("Button.shadow"));
 
-        table.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.darkShadow"));
+        table.setBackground(new java.awt.Color(102, 102, 102));
+        table.setForeground(new java.awt.Color(204, 204, 204));
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -140,49 +133,23 @@ public class Conflitos extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(table);
 
-        jPanel1.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.darkShadow"));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.setForeground(new java.awt.Color(51, 51, 51));
+        jPanel1.setForeground(new java.awt.Color(153, 153, 153));
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ID");
 
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nome");
 
         tfID.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
         tfNome.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel3.setText("N mortos");
-
-        tfNMortos.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-
-        tfNFeridos.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-
-        jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel4.setText("N feridos");
-
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel5.setText("Tipo");
-
-        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "territorial", "economico", "religioso", "racial" }));
-        cbTipo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbTipoItemStateChanged(evt);
-            }
-        });
-        cbTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTipoActionPerformed(evt);
-            }
-        });
-
-        tfOp.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-
-        lbOp.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        lbOp.setText("Região");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -191,57 +158,26 @@ public class Conflitos extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfID)
-                            .addComponent(tfNome)
-                            .addComponent(tfNMortos, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(11, 11, 11))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(lbOp))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfOp)
-                            .addComponent(tfNFeridos)
-                            .addComponent(cbTipo, 0, 110, Short.MAX_VALUE))))
-                .addContainerGap())
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tfID, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                    .addComponent(tfNome))
+                .addGap(10, 10, 10))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(63, 63, 63)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(tfNMortos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNFeridos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbOp)
-                    .addComponent(tfOp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         btnInsert.setText("Inserir");
@@ -278,66 +214,62 @@ public class Conflitos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-                .addGap(41, 41, 41)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnInsert)
                     .addComponent(btnInsert2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnInsert1)
                     .addComponent(btnInsert3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(btnInsert3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnInsert)
-                .addGap(44, 44, 44)
-                .addComponent(btnInsert1)
-                .addGap(52, 52, 52)
-                .addComponent(btnInsert2)
-                .addGap(52, 52, 52))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(btnInsert3)
+                        .addGap(46, 46, 46)
+                        .addComponent(btnInsert)
+                        .addGap(44, 44, 44)
+                        .addComponent(btnInsert1)
+                        .addGap(52, 52, 52)
+                        .addComponent(btnInsert2)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertActionPerformed
-        Integer id,nmortos,nferidos;
+        Integer id;
         String nome = '\''+tfNome.getText()+'\'';
         try{
             id = Integer.parseInt(tfID.getText());
-            nmortos = Integer.parseInt(tfNMortos.getText());
-            nferidos = Integer.parseInt(tfNFeridos.getText());
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null,
+            "ID precisa ser um número",
             "Campos Inválidos",
-            "um campo numérico possui letras",
             JOptionPane.ERROR_MESSAGE);
             return;
         }
         try {
-            
-            PreparedStatement sql = conn.prepareStatement("insert into conflito values ("+id+","+nome+","+nmortos+","+nferidos+")");
-            sql.executeUpdate();
-            sql = conn.prepareStatement("insert into "+cbTipo.getItemAt(cbTipo.getSelectedIndex())+" values ("+id+",\'"+tfOp.getText()+"\')");
-            sql.executeUpdate();
+            PreparedStatement sql = conn.prepareStatement("insert into grupo_armado values ("+id+","+nome+",null)");
+            int executeUpdate = sql.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,
             "ID não pode ser repetido",
             "Campos Inválidos",
             JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(Conflitos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GruposArmados.class.getName()).log(Level.SEVERE, null, ex);
         }
         selectAll();
     }//GEN-LAST:event_btnInsertActionPerformed
@@ -359,10 +291,10 @@ public class Conflitos extends javax.swing.JFrame {
                 :Integer.parseInt(table.getValueAt(table.getRowCount()-1, 0).toString());
         try {
             Statement del = conn.createStatement();
-            String sql = "Delete from conflito where codconflito="+idDel;
+            String sql = "Delete from grupo_armado where codigog="+idDel;
             del.execute(sql);
         } catch (SQLException ex) {
-            Logger.getLogger(Conflitos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GruposArmados.class.getName()).log(Level.SEVERE, null, ex);
         }
      
       selectAll();
@@ -370,66 +302,34 @@ public class Conflitos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInsert1ActionPerformed
 
     private void btnInsert2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsert2ActionPerformed
-        Integer id,oldId,nmortos,nferidos;
+        Integer idgrupo;
         String nome = '\''+tfNome.getText()+'\'';
-        String op = '\''+tfOp.getText()+'\'';
         try{
-            id = Integer.parseInt(tfID.getText());
-            oldId = Integer.valueOf(table.getValueAt(table.getSelectedRow(), 0).toString());
-            nmortos = Integer.parseInt(tfNMortos.getText());
-            nferidos = Integer.parseInt(tfNFeridos.getText());
+            idgrupo =Integer.valueOf(tfID.getText());
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null,
-            "Campos Inválidos",
-            "um campo numérico possui letras",
-            JOptionPane.ERROR_MESSAGE);
+            "Selecione um campo para poder editar",
+            "Comando inválido",
+            JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         try {
-            PreparedStatement sql = conn.prepareStatement("update conflito set codconflito="+id+","
-                    + "nome="+nome+",nummortos="+nmortos+",numferidos="+nferidos+",tipoconf="+op+" where codconflito="+oldId);
+            Integer idToChange =Integer.valueOf(table.getValueAt(table.getSelectedRow(),0).toString());
+            PreparedStatement sql = conn.prepareStatement("update grupo_armado set codigog="+idgrupo+",nomegrupo="+nome+" where codigog="+idToChange);
             sql.executeUpdate();
-            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,
             "ID não pode ser repetido",
             "Campos Inválidos",
             JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(Conflitos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GruposArmados.class.getName()).log(Level.SEVERE, null, ex);
         }
         selectAll();
     }//GEN-LAST:event_btnInsert2ActionPerformed
 
-    private void cbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTipoItemStateChanged
-
-    }//GEN-LAST:event_cbTipoItemStateChanged
-
-    private void cbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoActionPerformed
-        updateOpLabel();
-    }//GEN-LAST:event_cbTipoActionPerformed
-
     /**
      * @param args the command line arguments
      */
-    private void updateOpLabel(){
-        switch(cbTipo.getItemAt(cbTipo.getSelectedIndex())){
-            case "territorial":
-                lbOp.setText("regiao");
-                break;
-            case "religioso":
-                lbOp.setText("religiao");
-                break;
-            case "racial":
-                lbOp.setText("etnia");
-                break;
-            case "economico":
-                lbOp.setText("matprima");
-                break;
-            default:
-                lbOp.setText("regiao");
-                break;
-        }
-    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -444,21 +344,20 @@ public class Conflitos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Conflitos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GruposArmados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Conflitos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GruposArmados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Conflitos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GruposArmados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Conflitos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GruposArmados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Conflitos().setVisible(true);
+                new GruposArmados().setVisible(true);
             }
         });
     }
@@ -468,23 +367,15 @@ public class Conflitos extends javax.swing.JFrame {
     private javax.swing.JButton btnInsert1;
     private javax.swing.JButton btnInsert2;
     private javax.swing.JButton btnInsert3;
-    private javax.swing.JComboBox<String> cbTipo;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
-    private javax.swing.JLabel lbOp;
     private javax.swing.JTable table;
     private javax.swing.JTextField tfID;
-    private javax.swing.JTextField tfNFeridos;
-    private javax.swing.JTextField tfNMortos;
     private javax.swing.JTextField tfNome;
-    private javax.swing.JTextField tfOp;
     // End of variables declaration//GEN-END:variables
 }
