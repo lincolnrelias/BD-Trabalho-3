@@ -53,7 +53,7 @@ public class chefes extends javax.swing.JFrame {
             while(rs.next()){
                 cbDiv.addItem(String.valueOf(rs.getInt("coddivisao")));
             }
-            rs = stmt.executeQuery("Select nomelider from lider_politico");
+            rs = stmt.executeQuery("Select distinct nomelider from lider_politico");
             cbNomeLider.removeAllItems();
             while(rs.next()){
                 cbNomeLider.addItem(rs.getString("nomelider"));
@@ -428,8 +428,7 @@ public class chefes extends javax.swing.JFrame {
         try {
             ResultSet rsD;
             try (Statement smt = conn.createStatement()) {
-                rsD = smt.executeQuery("select nomelider from lider_politico l, divisao d where d.codigog="+cbGrupo.getSelectedItem().toString()+" and d.codigog=l.codigog");
-                System.out.println(cbGrupo.getSelectedItem().toString());
+                rsD = smt.executeQuery("select distinct nomelider from lider_politico l, divisao d where d.codigog="+cbGrupo.getSelectedItem().toString()+" and d.codigog=l.codigog");
                 cbNomeLider.removeAllItems();
                 while(rsD.next()){
                     cbNomeLider.addItem(rsD.getString("nomelider"));
@@ -445,7 +444,6 @@ public class chefes extends javax.swing.JFrame {
             ResultSet rsD;
             try (Statement smt = conn.createStatement()) {
                 rsD = smt.executeQuery("select coddivisao from divisao where codigog="+cbGrupo.getSelectedItem().toString());
-                System.out.println(cbGrupo.getSelectedItem().toString());
                 cbDiv.removeAllItems();
                 while(rsD.next()){
                     cbDiv.addItem(String.valueOf(rsD.getInt("coddivisao")));

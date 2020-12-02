@@ -167,7 +167,7 @@ public class Conflitos extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setText("Tipo");
 
-        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "territorial", "economico", "religioso", "racial" }));
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Territorial", "Economico", "Religioso", "Racial" }));
         cbTipo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbTipoItemStateChanged(evt);
@@ -328,7 +328,7 @@ public class Conflitos extends javax.swing.JFrame {
         }
         try {
             
-            PreparedStatement sql = conn.prepareStatement("insert into conflito values ("+id+","+nome+","+nmortos+","+nferidos+")");
+            PreparedStatement sql = conn.prepareStatement("insert into conflito values ("+id+","+nome+",null,"+nmortos+","+nferidos+")");
             sql.executeUpdate();
             sql = conn.prepareStatement("insert into "+cbTipo.getItemAt(cbTipo.getSelectedIndex())+" values ("+id+",\'"+tfOp.getText()+"\')");
             sql.executeUpdate();
@@ -372,6 +372,8 @@ public class Conflitos extends javax.swing.JFrame {
     private void btnInsert2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsert2ActionPerformed
         Integer id,oldId,nmortos,nferidos;
         String nome = '\''+tfNome.getText()+'\'';
+        String tipo = cbTipo.getSelectedItem().toString();
+        String oldTipo = table.getValueAt(table.getSelectedRow(), 2).toString();
         String op = '\''+tfOp.getText()+'\'';
         try{
             id = Integer.parseInt(tfID.getText());
@@ -387,9 +389,14 @@ public class Conflitos extends javax.swing.JFrame {
         }
         try {
             PreparedStatement sql = conn.prepareStatement("update conflito set codconflito="+id+","
-                    + "nome="+nome+",nummortos="+nmortos+",numferidos="+nferidos+",tipoconf="+op+" where codconflito="+oldId);
+                    + "nome="+nome+",nummortos="+nmortos+",numferidos="+nferidos+" where codconflito="+oldId);
             sql.executeUpdate();
-            
+            sql = conn.prepareStatement("update conflito set tipoconf='"+tipo+"' where codconflito="+id);
+            sql.execute();
+            sql = conn.prepareStatement("delete from "+oldTipo+" where codconflito="+id);
+            sql.execute();
+            sql = conn.prepareStatement("Insert into "+tipo+" values("+id+","+op+")");
+            sql.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,
             "ID não pode ser repetido",
@@ -413,16 +420,16 @@ public class Conflitos extends javax.swing.JFrame {
      */
     private void updateOpLabel(){
         switch(cbTipo.getItemAt(cbTipo.getSelectedIndex())){
-            case "territorial":
+            case "Territorial":
                 lbOp.setText("regiao");
                 break;
-            case "religioso":
+            case "Religioso":
                 lbOp.setText("religiao");
                 break;
-            case "racial":
+            case "Racial":
                 lbOp.setText("etnia");
                 break;
-            case "economico":
+            case "Economico":
                 lbOp.setText("matprima");
                 break;
             default:

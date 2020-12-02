@@ -417,7 +417,7 @@ public class Divisoes extends javax.swing.JFrame {
         }
         try {
             PreparedStatement sql = conn.prepareStatement("update divisao set codigog="+idGrupo+",coddivisao="+idDivisao+","
-                    + "numbaixasd="+baixas+",homens="+homens+",avioes="+avioes+",barcos="+barcos+",tanques="+tanques+" where codigog="+idGrupoOld+" and coddivisao="+idDivOld);
+                    + "numbaixasd="+baixas+",homens="+homens+",aviões="+avioes+",barcos="+barcos+",tanques="+tanques+" where codigog="+idGrupoOld+" and coddivisao="+idDivOld);
             sql.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,

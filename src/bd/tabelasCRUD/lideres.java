@@ -326,9 +326,13 @@ public class lideres extends javax.swing.JFrame {
         int idDel=table.getSelectedRow()!=-1
                 ?Integer.parseInt(table.getValueAt(table.getSelectedRow(), 0).toString())
                 :Integer.parseInt(table.getValueAt(table.getRowCount()-1, 0).toString());
+        String nomeL=table.getSelectedRow()!=-1
+                ?table.getValueAt(table.getSelectedRow(), 1).toString()
+                :table.getValueAt(table.getRowCount()-1, 1).toString();
+        nomeL = '\''+nomeL+'\'';
         try {
             Statement del = conn.createStatement();
-            String sql = "Delete from lider_politico where codigog="+idDel;
+            String sql = "Delete from lider_politico where codigog="+idDel+" and nomelider="+nomeL;
             del.execute(sql);
         } catch (SQLException ex) {
             Logger.getLogger(lideres.class.getName()).log(Level.SEVERE, null, ex);
@@ -341,6 +345,7 @@ public class lideres extends javax.swing.JFrame {
     private void btnInsert2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsert2ActionPerformed
         Integer idOld;
         String nome = '\''+tfNome.getText()+'\'';
+        String oldNome = '\''+table.getValueAt(table.getSelectedRow(),1).toString()+'\'';
         String apoios = '\''+taApoios.getText()+'\'';
         try{
             idOld =Integer.valueOf(table.getValueAt(table.getSelectedRow(),0).toString());
@@ -352,7 +357,7 @@ public class lideres extends javax.swing.JFrame {
             return;
         }
         try {
-            PreparedStatement sql = conn.prepareStatement("update lider_politico set nomelider="+nome+",apoios="+apoios+" where codigog="+idOld);
+            PreparedStatement sql = conn.prepareStatement("update lider_politico set nomelider="+nome+",apoios="+apoios+" where codigog="+idOld+" and nomelider="+oldNome);
             sql.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,
