@@ -33,7 +33,7 @@ public class chefes extends javax.swing.JFrame {
         selectAll();
     }
     public void selectAll(){
-        String url = "jdbc:postgresql://localhost/trabalho 3";
+        String url = "jdbc:postgresql://localhost/EPBD2";
         Properties props = new Properties();
         props.setProperty("user","postgres");
         props.setProperty("password","admin");
@@ -337,7 +337,8 @@ public class chefes extends javax.swing.JFrame {
             return;
         }
         try {
-            PreparedStatement sql = conn.prepareStatement("Insert into chefe_militar values("+id+","+faixa+","+idDiv+","+idGrupo+","+nomelider+")");
+            PreparedStatement sql = conn.prepareStatement("Insert into chefe_militar values"
+                    + "("+id+","+faixa+","+idDiv+","+idGrupo+","+nomelider+")");
             sql.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,

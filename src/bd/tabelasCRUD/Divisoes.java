@@ -36,7 +36,7 @@ public class Divisoes extends javax.swing.JFrame {
         selectAll();
     }
     public void selectAll(){
-        String url = "jdbc:postgresql://localhost/trabalho 3";
+        String url = "jdbc:postgresql://localhost/EPBD2";
         Properties props = new Properties();
         props.setProperty("user","postgres");
         props.setProperty("password","admin");
@@ -354,7 +354,9 @@ public class Divisoes extends javax.swing.JFrame {
             return;
         }
         try {
-            PreparedStatement sql = conn.prepareStatement("insert into divisao values ("+idGrupo+","+idDivisao+","+baixas+","+homens+","+avioes+","+barcos+","+tanques+")");
+            PreparedStatement sql = conn.prepareStatement("insert into divisao values "
+                    + "("+idGrupo+","+idDivisao+","+baixas+","+homens+","
+                            + ""+avioes+","+barcos+","+tanques+")");
             sql.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,
@@ -417,7 +419,8 @@ public class Divisoes extends javax.swing.JFrame {
         }
         try {
             PreparedStatement sql = conn.prepareStatement("update divisao set codigog="+idGrupo+",coddivisao="+idDivisao+","
-                    + "numbaixasd="+baixas+",homens="+homens+",aviões="+avioes+",barcos="+barcos+",tanques="+tanques+" where codigog="+idGrupoOld+" and coddivisao="+idDivOld);
+                    + "numbaixasd="+baixas+",homens="+homens+",aviões="+avioes+",barcos="+barcos+","
+                            + "tanques="+tanques+" where codigog="+idGrupoOld+" and coddivisao="+idDivOld);
             sql.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,

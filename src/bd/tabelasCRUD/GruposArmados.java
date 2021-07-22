@@ -34,7 +34,7 @@ public class GruposArmados extends javax.swing.JFrame {
         selectAll();
     }
     public void selectAll(){
-        String url = "jdbc:postgresql://localhost/trabalho 3";
+        String url = "jdbc:postgresql://localhost/EPBD2";
         Properties props = new Properties();
         props.setProperty("user","postgres");
         props.setProperty("password","admin");
@@ -239,9 +239,9 @@ public class GruposArmados extends javax.swing.JFrame {
                         .addComponent(btnInsert3)
                         .addGap(46, 46, 46)
                         .addComponent(btnInsert)
-                        .addGap(44, 44, 44)
+                        .addGap(37, 37, 37)
                         .addComponent(btnInsert1)
-                        .addGap(52, 52, 52)
+                        .addGap(59, 59, 59)
                         .addComponent(btnInsert2)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
@@ -263,7 +263,7 @@ public class GruposArmados extends javax.swing.JFrame {
         }
         try {
             PreparedStatement sql = conn.prepareStatement("insert into grupo_armado values ("+id+","+nome+",null)");
-            int executeUpdate = sql.executeUpdate();
+            sql.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,
             "ID não pode ser repetido",
@@ -315,7 +315,8 @@ public class GruposArmados extends javax.swing.JFrame {
         }
         try {
             Integer idToChange =Integer.valueOf(table.getValueAt(table.getSelectedRow(),0).toString());
-            PreparedStatement sql = conn.prepareStatement("update grupo_armado set codigog="+idgrupo+",nomegrupo="+nome+" where codigog="+idToChange);
+            PreparedStatement sql = conn.prepareStatement("update grupo_armado set "
+                    + "codigog="+idgrupo+",nomegrupo="+nome+" where codigog="+idToChange);
             sql.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,

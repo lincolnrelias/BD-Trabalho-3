@@ -35,7 +35,7 @@ public class lideres extends javax.swing.JFrame {
         selectAll();
     }
     public void selectAll(){
-        String url = "jdbc:postgresql://localhost/trabalho 3";
+        String url = "jdbc:postgresql://localhost/EPBD2";
         Properties props = new Properties();
         props.setProperty("user","postgres");
         props.setProperty("password","admin");
@@ -357,7 +357,8 @@ public class lideres extends javax.swing.JFrame {
             return;
         }
         try {
-            PreparedStatement sql = conn.prepareStatement("update lider_politico set nomelider="+nome+",apoios="+apoios+" where codigog="+idOld+" and nomelider="+oldNome);
+            PreparedStatement sql = conn.prepareStatement("update lider_politico set nomelider="+nome+","
+                    + "apoios="+apoios+" where codigog="+idOld+" and nomelider="+oldNome);
             sql.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,

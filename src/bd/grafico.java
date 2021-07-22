@@ -28,7 +28,7 @@ public class grafico {
     int nTerritoriais=0,nRaciais=0,nReligiosos=0,nEconomicos=0;
     public void fetchData(){
             Connection conn = null;
-            String url = "jdbc:postgresql://localhost/trabalho 3";
+            String url = "jdbc:postgresql://localhost/EPBD2";
             Properties props = new Properties();
             props.setProperty("user","postgres");
             props.setProperty("password","admin");

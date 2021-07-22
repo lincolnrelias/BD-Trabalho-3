@@ -34,7 +34,7 @@ public class tabelaOrgs extends javax.swing.JFrame {
         selectAll();
     }
     public void selectAll(){
-        String url = "jdbc:postgresql://localhost/trabalho 3";
+        String url = "jdbc:postgresql://localhost/EPBD2";
         Properties props = new Properties();
         props.setProperty("user","postgres");
         props.setProperty("password","admin");

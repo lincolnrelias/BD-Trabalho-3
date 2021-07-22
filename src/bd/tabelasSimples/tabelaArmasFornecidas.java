@@ -34,7 +34,7 @@ public class tabelaArmasFornecidas extends javax.swing.JFrame {
         selectAll();
     }
     public void selectAll(){
-        String url = "jdbc:postgresql://localhost/trabalho 3";
+        String url = "jdbc:postgresql://localhost/EPBD2";
         Properties props = new Properties();
         props.setProperty("user","postgres");
         props.setProperty("password","admin");
@@ -43,8 +43,8 @@ public class tabelaArmasFornecidas extends javax.swing.JFrame {
             conn = DriverManager.getConnection(url, props);
             stmt = conn.createStatement();
             rs = stmt.executeQuery("select codigog,nomegrupo ,sum(numarmas) as armas_fornecidas\n" +
-"from fornece f natural join grupo_armado ga\n" +
-"group by ga.nomegrupo,f.codigog order by armas_fornecidas desc limit 5");
+                "from fornece f natural join grupo_armado ga\n" +
+                "group by ga.nomegrupo,f.codigog order by armas_fornecidas desc limit 5");
             table.setModel(DbUtils.resultSetToTableModel(rs));
             
         } catch (SQLException ex) {
